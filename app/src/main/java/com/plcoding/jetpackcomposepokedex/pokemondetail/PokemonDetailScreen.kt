@@ -33,7 +33,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltNavGraphViewModel
 import androidx.navigation.NavController
-import com.google.accompanist.coil.CoilImage
+import com.google.accompanist.coil.rememberCoilPainter
 import com.plcoding.jetpackcomposepokedex.data.remote.responses.Pokemon
 import com.plcoding.jetpackcomposepokedex.data.remote.responses.Type
 import com.plcoding.jetpackcomposepokedex.util.Resource
@@ -97,13 +97,13 @@ fun PokemonDetailScreen(
             .fillMaxSize()) {
             if(pokemonInfo is Resource.Success) {
                 pokemonInfo.data?.sprites?.let {
-                    CoilImage(
-                        data = it.frontDefault,
+                    Image(
+                        painter = rememberCoilPainter(it.frontDefault),
                         contentDescription = pokemonInfo.data.name,
-                        fadeIn = true,
                         modifier = Modifier
                             .size(pokemonImageSize)
                             .offset(y = topPadding)
+
                     )
                 }
             }
